@@ -202,6 +202,27 @@ else
 fi
 
 echo -e "${MAGENTA}╔══════════════════════════════════════════════════════════════════════╗${NC}"
+echo -e "${MAGENTA}║                    Phase 4: Install Global Commands                 ║${NC}"
+echo -e "${MAGENTA}║                   (Make commands available everywhere)               ║${NC}"
+echo -e "${MAGENTA}╚══════════════════════════════════════════════════════════════════════╝${NC}"
+echo ""
+
+# Install global commands
+if [ -f "$SCRIPT_DIR/install_commands.sh" ]; then
+    echo -e "${YELLOW}Installing global dotfiles commands...${NC}"
+    echo -e "${CYAN}This will make dotfiles-pull, dotfiles-push, and dotfiles-setup available from anywhere.${NC}"
+    prompt_continue "Install global commands?"
+    
+    run_command "Installing global dotfiles commands" \
+                "cd '$REPO_ROOT' && '$SCRIPT_DIR/install_commands.sh'"
+else
+    echo -e "${YELLOW}⚠ Warning: install_commands.sh not found${NC}"
+    echo "Global commands will not be installed."
+    echo "You can install them later by running: ./utilities/install_commands.sh"
+    echo ""
+fi
+
+echo -e "${MAGENTA}╔══════════════════════════════════════════════════════════════════════╗${NC}"
 echo -e "${MAGENTA}║                           Setup Complete!                           ║${NC}"
 echo -e "${MAGENTA}╚══════════════════════════════════════════════════════════════════════╝${NC}"
 echo ""
@@ -212,7 +233,12 @@ echo "• Restart your terminal or open a new terminal session"
 echo "• Run 'tmux' and press 'prefix + I' (usually Ctrl+b + I) to install tmux plugins"
 echo "• Verify your configurations are working as expected"
 echo ""
-echo -e "${CYAN}Useful Commands:${NC}"
+echo -e "${CYAN}Global Commands Available:${NC}"
+echo "• ${YELLOW}dotfiles-pull${NC}   - Pull latest configs from system to repo"
+echo "• ${YELLOW}dotfiles-push${NC}   - Push configs from repo to system"
+echo "• ${YELLOW}dotfiles-setup${NC}  - Re-run complete setup (if needed)"
+echo ""
+echo -e "${CYAN}Local Commands (if global install failed):${NC}"
 echo "• Pull latest configs: ./utilities/pull.sh"
 echo "• Push configs to system: ./utilities/push.sh"
 echo "• Re-run setup: ./utilities/setup.sh"
