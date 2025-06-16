@@ -15,7 +15,14 @@ NC='\033[0m' # No Color
 
 # Get the directory where this script is located
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-REPO_ROOT="$(dirname "$SCRIPT_DIR")"
+
+# Use DOTFILES_REPO_DIR if set, otherwise derive from script location
+if [ -n "$DOTFILES_REPO_DIR" ]; then
+    REPO_ROOT="$DOTFILES_REPO_DIR"
+else
+    REPO_ROOT="$(dirname "$SCRIPT_DIR")"
+fi
+
 CONFIG_DIR="$REPO_ROOT/configuration"
 
 echo -e "${BLUE}=== Dotfiles Pull Script ===${NC}"

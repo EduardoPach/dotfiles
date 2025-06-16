@@ -31,6 +31,7 @@ source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 export NIX_DIR="$HOME/.config/nix" # Nix configuration directory
 export ARGMAX_DIR="$HOME/argmax" # Argmax directory
 export ZSHRC_FILE="$HOME/.zshrc" # Zshrc file
+export DOTFILES_REPO_DIR="$HOME/dotfiles" # Dotfiles repository directory
 ################### ENVIRONMENT VARIABLES ###################
 
 # SSH Agent Configuration
