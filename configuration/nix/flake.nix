@@ -80,6 +80,7 @@
           "pre-commit"
           "zsh-autosuggestions"
           "zsh-syntax-highlighting"
+          "texlive"
         ];        # CLI tools from Homebrew
         casks = [ 
           "raycast"
