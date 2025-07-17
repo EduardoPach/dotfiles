@@ -87,6 +87,7 @@
           "notion"
           "stats"
           "font-meslo-lg-nerd-font"
+          "mactext"
         ];        # GUI apps from Homebrew Casks
         masApps = {
         };
