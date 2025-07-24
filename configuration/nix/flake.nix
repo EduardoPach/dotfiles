@@ -80,6 +80,7 @@
           "pre-commit"
           "zsh-autosuggestions"
           "zsh-syntax-highlighting"
+          "texlive"
         ];        # CLI tools from Homebrew
         casks = [ 
           "raycast"
@@ -87,6 +88,7 @@
           "notion"
           "stats"
           "font-meslo-lg-nerd-font"
+          "mactex"
         ];        # GUI apps from Homebrew Casks
         masApps = {
         };
