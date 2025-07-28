@@ -80,38 +80,6 @@
                         "is_pointing_device": true
                     },
                     "ignore": false
-                },
-                {
-                    "identifiers": {
-                        "device_address": "e4-ce-a1-72-7b-fc",
-                        "is_keyboard": true,
-                        "is_pointing_device": true
-                    },
-                    "ignore": false
-                },
-                {
-                    "identifiers": {
-                        "device_address": "e4-ce-a1-72-5a-8d",
-                        "is_keyboard": true,
-                        "is_pointing_device": true
-                    },
-                    "ignore": false
-                },
-                {
-                    "identifiers": {
-                        "device_address": "e4-ce-a1-72-5a-8e",
-                        "is_keyboard": true,
-                        "is_pointing_device": true
-                    },
-                    "ignore": false
-                },
-                {
-                    "identifiers": {
-                        "device_address": "e4-ce-a1-72-5a-8f",
-                        "is_keyboard": true,
-                        "is_pointing_device": true
-                    },
-                    "ignore": false
                 }
             ],
             "name": "Default profile",

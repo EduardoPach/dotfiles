@@ -9,7 +9,7 @@ source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# history setup
+################### HISTORY SETUP ###################
 HISTFILE=$HOME/.zhistory
 SAVEHIST=10000
 HISTSIZE=10000
@@ -18,11 +18,11 @@ setopt hist_expire_dups_first
 setopt hist_ignore_dups
 setopt hist_verify
 
-# completion using arrow keys (based on history)
+################### COMPLETION USING ARROW KEYS (BASED ON HISTORY) ###################
 bindkey '^[[A' history-search-backward
 bindkey '^[[B' history-search-forward
 
-# Load autocompletion
+################### LOAD AUTOSUGGESTIONS AND SYNTAX HIGHLIGHTING ###################
 autoload -Uz compinit && compinit
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -32,16 +32,26 @@ export NIX_DIR="$HOME/.config/nix" # Nix configuration directory
 export ARGMAX_DIR="$HOME/argmax" # Argmax directory
 export ZSHRC_FILE="$HOME/.zshrc" # Zshrc file
 export DOTFILES_REPO_DIR="$HOME/dotfiles" # Dotfiles repository directory
-################### ENVIRONMENT VARIABLES ###################
 
-# SSH Agent Configuration
+################### ALIASES ###################
+# Add alias for uv tools I don't want to install
+alias fluidtop='sudo uvx fluidtop'
+alias cookiecutter='uvx cookiecutter'
+alias timer-cli='uvx --from timer-cli timer'
+# Convenience aliases
+alias dotfiles='cd ~/dotfiles'
+alias dotfiles-open='cursor ~/dotfiles'
+alias zshrc-open='cursor ~/.zshrc'
+alias source-zsh='source ~/.zshrc'
+
+################### SSH AGENT CONFIGURATION ###################
 # Check if SSH agent is running by looking for its socket environment variable
 if [ -z "$SSH_AUTH_SOCK" ]; then
     # Start a new SSH agent and set up the environment variables (silently)
     eval "$(ssh-agent -s)" >/dev/null
 fi
 
-# GitHub SSH Key Management
+################### GITHUB SSH KEY MANAGEMENT ###################
 # Verify the GitHub SSH key exists in the expected location
 if [ -f "$HOME/.ssh/id_ed25519_github" ]; then
     # Check if any SSH keys are currently loaded (-l lists keys, exit code 1 means no keys)
@@ -52,6 +62,8 @@ if [ -f "$HOME/.ssh/id_ed25519_github" ]; then
     fi
 fi
 
+
+################### UV FIXES ###################
 # UV Python -> Workaround to fix issue related to TAB completion not working for python files 
 # See for more details: https://github.com/astral-sh/uv/issues/8432
 # Workaround mentioned at https://github.com/astral-sh/uv/issues/8432#issuecomment-2965692994
