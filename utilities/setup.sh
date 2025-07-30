@@ -31,6 +31,7 @@ echo -e "${MAGENTA}║                   Complete Machine Setup Automation      
 echo -e "${MAGENTA}╚══════════════════════════════════════════════════════════════════════╝${NC}"
 echo ""
 echo "Repository root: $REPO_ROOT"
+echo "Script directory: $SCRIPT_DIR"
 echo "This script will set up your entire working environment."
 echo ""
 
@@ -140,6 +141,16 @@ if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
                 "git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm"
 else
     echo -e "${GREEN}✓ tmux plugin manager (tpm) already installed${NC}"
+    echo ""
+fi
+
+# Install uv (Python package manager)
+# Using official installer instead of brew/nixpkgs to get the latest version
+if ! command_exists uv; then
+    run_command "Installing uv (Python package manager)" \
+                "curl -LsSf https://astral.sh/uv/install.sh | sh"
+else
+    echo -e "${GREEN}✓ uv (Python package manager) already installed${NC}"
     echo ""
 fi
 

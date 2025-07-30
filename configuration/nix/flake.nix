@@ -56,7 +56,6 @@
           pkgs.tmux
           pkgs.code-cursor
           pkgs.arc-browser
-          pkgs.uv # Astral UV python package manager
           pkgs.poetry # Poetry python package manager
           pkgs.kitty
           pkgs.ffmpeg
@@ -70,25 +69,25 @@
        homebrew = {
         enable = true;
         brews = [ 
-          "mas"
-          "git"
-          "swift-format"
-          "whisperkit-cli"
-          "powerlevel10k"
-          "tree"
-          "huggingface-cli"
-          "pre-commit"
-          "zsh-autosuggestions"
-          "zsh-syntax-highlighting"
-          "texlive"
+          "mas" # Mac App Store CLI
+          "git" # Git CLI
+          "swift-format" # Swift format for Swift code
+          "whisperkit-cli" # Argmax WhisperKit CLI
+          "powerlevel10k" # Powerlevel10k zsh theme
+          "tree" # Tree command for directory listing
+          "huggingface-cli" # Hugging Face CLI
+          "pre-commit" # Pre-commit hooks for git
+          "zsh-autosuggestions" # Autosuggestions for zsh
+          "zsh-syntax-highlighting" # Syntax highlighting for zsh
+          "texlive" # TeX Live for LaTeX -> necessary for VSCode/Cursor to render LaTeX
         ];        # CLI tools from Homebrew
         casks = [ 
-          "raycast"
-          "karabiner-elements"
-          "notion"
-          "stats"
-          "font-meslo-lg-nerd-font"
-          "mactex"
+          "raycast" # Raycast -> better Spotlight
+          "karabiner-elements" # Karabiner -> Keyboard remapping
+          "notion" # Notion -> Note-taking
+          "stats" # Stats -> System monitor
+          "font-meslo-lg-nerd-font" # Meslo Nerd Font -> Better font for terminal
+          "mactex" # MacTeX -> LaTeX for macOS
         ];        # GUI apps from Homebrew Casks
         masApps = {
         };
