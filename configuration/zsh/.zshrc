@@ -42,6 +42,7 @@ alias timer-cli='uvx --from timer-cli timer'
 alias dotfiles='cd ~/dotfiles'
 alias dotfiles-open='cursor ~/dotfiles'
 alias zshrc-open='cursor ~/.zshrc'
+alias nix-sync='sudo darwin-rebuild switch --flake ~/.config/nix'
 alias source-zsh='source ~/.zshrc'
 
 ################### SSH AGENT CONFIGURATION ###################
