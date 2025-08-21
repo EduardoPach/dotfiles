@@ -80,6 +80,7 @@
           "zsh-autosuggestions" # Autosuggestions for zsh
           "zsh-syntax-highlighting" # Syntax highlighting for zsh
           "texlive" # TeX Live for LaTeX -> necessary for VSCode/Cursor to render LaTeX
+          "portaudio" # Portaudio for audio input/output -> necessary for whisperkittools
         ];        # CLI tools from Homebrew
         casks = [ 
           "raycast" # Raycast -> better Spotlight
