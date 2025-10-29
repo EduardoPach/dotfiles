@@ -25,7 +25,7 @@
           static-only = false;            # Only show running applications
           persistent-apps = [
             "/System/Applications/System\ Settings.app"
-            # "/Applications/Nix\ Apps/Arc.app" # Arc is unmaintened therefore can not be distributed by Nix
+            # "/Applications/Nix\ Apps/Arc.app"
             "/Applications/Slack.app"
             "/Applications/Nix\ Apps/Cursor.app"
           ];
@@ -55,7 +55,7 @@
           pkgs.vim
           pkgs.tmux
           pkgs.code-cursor
-          # pkgs.arc-browser # Arc is unmaintened therefore can not be distributed by Nix
+          # pkgs.arc-browser
           pkgs.poetry # Poetry python package manager
           pkgs.kitty
           pkgs.ffmpeg
