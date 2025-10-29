@@ -63,16 +63,18 @@ if [ -f "$HOME/.ssh/id_ed25519_github" ]; then
     fi
 fi
 
-
-################### UV FIXES ###################
-# UV Python -> Workaround to fix issue related to TAB completion not working for python files 
-# See for more details: https://github.com/astral-sh/uv/issues/8432
-# Workaround mentioned at https://github.com/astral-sh/uv/issues/8432#issuecomment-2965692994
-_uv_run_mod() {
-    if [[ "$words[2]" == "run" && "$words[CURRENT]" != -* ]]; then
-        _arguments '*:filename:_files -g "*.py"'
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/eduardo/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/eduardo/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/Users/eduardo/miniconda3/etc/profile.d/conda.sh"
     else
-        _uv "$@"
+        export PATH="/Users/eduardo/miniconda3/bin:$PATH"
     fi
-}
-compdef _uv_run_mod uv
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+

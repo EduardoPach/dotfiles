@@ -154,6 +154,15 @@ else
     echo ""
 fi
 
+# Install conda (Python package manager)
+if ! command_exists conda; then
+    run_command "Installing conda (Python package manager)" \
+                " curl -o ~/Miniconda3-latest-MacOSX-arm64.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-arm64.sh && bash ~/Miniconda3-latest-MacOSX-arm64.sh"
+else
+    echo -e "${GREEN}✓ conda (Python package manager) already installed${NC}"
+    echo ""
+fi
+
 echo -e "${MAGENTA}╔══════════════════════════════════════════════════════════════════════╗${NC}"
 echo -e "${MAGENTA}║                     Phase 2: Push Configurations                    ║${NC}"
 echo -e "${MAGENTA}║                    (Automated with ACCEPT_ALL=1)                    ║${NC}"
