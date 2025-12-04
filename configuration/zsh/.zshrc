@@ -32,6 +32,12 @@ export NIX_DIR="$HOME/.config/nix" # Nix configuration directory
 export ARGMAX_DIR="$HOME/argmax" # Argmax directory
 export ZSHRC_FILE="$HOME/.zshrc" # Zshrc file
 export DOTFILES_REPO_DIR="$HOME/dotfiles" # Dotfiles repository directory
+# necessary for torchcodec as it doesn't work with Homebrew or Nix installed ffmpeg 
+# solution from -> https://github.com/meta-pytorch/torchcodec/issues/570#issuecomment-2913609176
+export DYLD_FALLBACK_LIBRARY_PATH="$(dirname "$(find /nix/store -path '*/lib/libavutil.*.dylib' -maxdepth 5 -print -quit)")"
+
+################### UV SETUP ###################
+source $HOME/.local/bin/env
 
 ################### ALIASES ###################
 # Add alias for uv tools I don't want to install
@@ -44,6 +50,8 @@ alias dotfiles-open='cursor ~/dotfiles'
 alias zshrc-open='cursor ~/.zshrc'
 alias nix-sync='sudo darwin-rebuild switch --flake ~/.config/nix'
 alias source-zsh='source ~/.zshrc'
+# OpenBench CLI as a tool
+alias openbench-cli='uvx --from git+https://github.com/argmaxinc/OpenBench.git@main openbench-cli'
 
 ################### SSH AGENT CONFIGURATION ###################
 # Check if SSH agent is running by looking for its socket environment variable
