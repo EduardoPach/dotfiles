@@ -61,7 +61,6 @@
           pkgs.ffmpeg
           pkgs.wget
           pkgs.docker # Still need to download Docker Desktop
-          pkgs.mactop
           pkgs.asitop
         ];
 
@@ -82,6 +81,7 @@
           "texlive" # TeX Live for LaTeX -> necessary for VSCode/Cursor to render LaTeX
           "portaudio" # Portaudio for audio input/output -> necessary for whisperkittools
           "just" # Just for Justfile
+          "mactop" # mactop for system monitoring
         ];        # CLI tools from Homebrew
         casks = [ 
           "raycast" # Raycast -> better Spotlight
