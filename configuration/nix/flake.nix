@@ -25,7 +25,6 @@
           static-only = false;            # Only show running applications
           persistent-apps = [
             "/System/Applications/System\ Settings.app"
-            # "/Applications/Nix\ Apps/Arc.app"
             "/Applications/Slack.app"
             "/Applications/Nix\ Apps/Cursor.app"
           ];
@@ -55,7 +54,6 @@
           pkgs.vim
           pkgs.tmux
           pkgs.code-cursor
-          # pkgs.arc-browser
           pkgs.poetry # Poetry python package manager
           pkgs.kitty
           pkgs.ffmpeg
@@ -82,6 +80,7 @@
           "portaudio" # Portaudio for audio input/output -> necessary for whisperkittools
           "just" # Just for Justfile
           "mactop" # mactop for system monitoring
+          "gh" # GitHub CLI
         ];        # CLI tools from Homebrew
         casks = [ 
           "raycast" # Raycast -> better Spotlight
