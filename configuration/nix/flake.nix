@@ -81,6 +81,10 @@
           "just" # Just for Justfile
           "mactop" # mactop for system monitoring
           "gh" # GitHub CLI
+          "yq" # YAML processor
+          "node" # Node.js for JavaScript and TypeScript
+          "rustup" # Rustup for Rust programming language
+          "anemll-profile" # ANE MLL profiling tool
         ];        # CLI tools from Homebrew
         casks = [ 
           "raycast" # Raycast -> better Spotlight
@@ -89,10 +93,11 @@
           "stats" # Stats -> System monitor
           "font-meslo-lg-nerd-font" # Meslo Nerd Font -> Better font for terminal
           "mactex" # MacTeX -> LaTeX for macOS
+          "obsidian"
         ];        # GUI apps from Homebrew Casks
         masApps = {
         };
-        taps = [ ];                  # Optional: extra taps
+        taps = [ "anemll/tap" ];      # Optional: extra taps
         onActivation.cleanup = "zap"; # Optional: cleanup removed brews/casks
       };
 
