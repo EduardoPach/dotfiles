@@ -85,6 +85,7 @@
           "node" # Node.js for JavaScript and TypeScript
           "rustup" # Rustup for Rust programming language
           "anemll-profile" # ANE MLL profiling tool
+          "jira-cli" # Jira CLI
         ];        # CLI tools from Homebrew
         casks = [ 
           "raycast" # Raycast -> better Spotlight
@@ -93,7 +94,8 @@
           "stats" # Stats -> System monitor
           "font-meslo-lg-nerd-font" # Meslo Nerd Font -> Better font for terminal
           "mactex" # MacTeX -> LaTeX for macOS
-          "obsidian"
+          "obsidian" # Obsidian Desktop -> Note-taking
+          "gcloud-cli" # Google Cloud CLI
         ];        # GUI apps from Homebrew Casks
         masApps = {
         };
