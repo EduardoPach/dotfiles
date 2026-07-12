@@ -4,12 +4,14 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nix-darwin.url = "github:nix-darwin/nix-darwin/master";
-    mac-app-util.url = "github:hraban/mac-app-util"; # fixes Spothlight indexing problem
+    # mac-app-util removed: it runs an SBCL program during activation, and SBCL cannot run on
+    # macOS 27 (fixed-address heap: "failed to allocate ... at 0x300100000"). SBCL also can't be
+    # rebuilt because it bootstraps itself and hits the same failure. Restore once SBCL supports macOS 27.
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, mac-app-util, nix-homebrew}:
+  outputs = inputs@{ self, nix-darwin, nixpkgs, nix-homebrew}:
   let
     configuration = { pkgs, ... }: {
       # needed to install unfree apps like Cursor; Obsidian, etc
@@ -56,10 +58,9 @@
           pkgs.code-cursor
           pkgs.poetry # Poetry python package manager
           pkgs.kitty
-          pkgs.ffmpeg
           pkgs.wget
           pkgs.docker # Still need to download Docker Desktop
-          pkgs.asitop
+          pkgs.macpm # asitop was renamed to macpm in nixpkgs
         ];
 
       system.primaryUser = "eduardo";
@@ -86,6 +87,7 @@
           "rustup" # Rustup for Rust programming language
           "anemll-profile" # ANE MLL profiling tool
           "jira-cli" # Jira CLI
+          "ffmpeg" # FFmpeg for video and audio processing
         ];        # CLI tools from Homebrew
         casks = [ 
           "raycast" # Raycast -> better Spotlight
@@ -99,7 +101,8 @@
         ];        # GUI apps from Homebrew Casks
         masApps = {
         };
-        taps = [ "anemll/tap" ];      # Optional: extra taps
+        # trusted: Homebrew 6.0 refuses to load formulae from non-official taps unless trusted.
+        taps = [ { name = "anemll/tap"; trusted = true; } ];      # Optional: extra taps
         onActivation.cleanup = "zap"; # Optional: cleanup removed brews/casks
       };
 
@@ -125,17 +128,13 @@
     # Build darwin flake using:
     # $ darwin-rebuild build --flake .#Eduardos-MacBook-Pro
     darwinConfigurations."Eduardos-MacBook-Pro" = nix-darwin.lib.darwinSystem {
-      modules = [ 
-        configuration 
-        mac-app-util.darwinModules.default
+      modules = [
+        configuration
         nix-homebrew.darwinModules.nix-homebrew
         {
           nix-homebrew = {
             # Install Homebrew under the default prefix
             enable = true;
-
-            # Apple Silicon Only: Also install Homebrew under the default Intel prefix for Rosetta 2
-            enableRosetta = true;
 
             # User owning the Homebrew prefix
             user = "eduardo";
