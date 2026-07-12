@@ -5,6 +5,12 @@
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
+
+################### HOMEBREW SETUP ###################
+# Put the arm64 Homebrew (/opt/homebrew) first on PATH so `brew` resolves to the
+# Apple Silicon prefix instead of the Intel/Rosetta one at /usr/local.
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -32,6 +38,7 @@ export NIX_DIR="$HOME/.config/nix" # Nix configuration directory
 export ARGMAX_DIR="$HOME/argmax" # Argmax directory
 export ZSHRC_FILE="$HOME/.zshrc" # Zshrc file
 export DOTFILES_REPO_DIR="$HOME/dotfiles" # Dotfiles repository directory
+export JIRA_API_TOKEN="$(security find-generic-password -a "$USER" -s JIRA_API_TOKEN -w)" # Jira API token from Keychain
 
 ################### UV SETUP ###################
 source $HOME/.local/bin/env

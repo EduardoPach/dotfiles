@@ -4,7 +4,9 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nix-darwin.url = "github:nix-darwin/nix-darwin/master";
-    mac-app-util.url = "github:hraban/mac-app-util"; # fixes Spothlight indexing problem
+    # Pinned: newer mac-app-util pulls sbcl 2.6.4, which fails to build from source on macOS 27.
+    # This revision uses the already-cached sbcl 2.4.10. Unpin once upstream sbcl builds on macOS 27.
+    mac-app-util.url = "github:hraban/mac-app-util/8414fa1e2cb775b17793104a9095aabeeada63ef"; # fixes Spotlight indexing problem
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
   };
@@ -56,10 +58,9 @@
           pkgs.code-cursor
           pkgs.poetry # Poetry python package manager
           pkgs.kitty
-          pkgs.ffmpeg
           pkgs.wget
           pkgs.docker # Still need to download Docker Desktop
-          pkgs.asitop
+          pkgs.macpm # asitop was renamed to macpm in nixpkgs
         ];
 
       system.primaryUser = "eduardo";
@@ -86,6 +87,7 @@
           "rustup" # Rustup for Rust programming language
           "anemll-profile" # ANE MLL profiling tool
           "jira-cli" # Jira CLI
+          "ffmpeg" # FFmpeg for video and audio processing
         ];        # CLI tools from Homebrew
         casks = [ 
           "raycast" # Raycast -> better Spotlight
@@ -133,9 +135,6 @@
           nix-homebrew = {
             # Install Homebrew under the default prefix
             enable = true;
-
-            # Apple Silicon Only: Also install Homebrew under the default Intel prefix for Rosetta 2
-            enableRosetta = true;
 
             # User owning the Homebrew prefix
             user = "eduardo";
