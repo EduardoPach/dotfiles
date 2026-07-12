@@ -4,14 +4,14 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nix-darwin.url = "github:nix-darwin/nix-darwin/master";
-    # Pinned: newer mac-app-util pulls sbcl 2.6.4, which fails to build from source on macOS 27.
-    # This revision uses the already-cached sbcl 2.4.10. Unpin once upstream sbcl builds on macOS 27.
-    mac-app-util.url = "github:hraban/mac-app-util/8414fa1e2cb775b17793104a9095aabeeada63ef"; # fixes Spotlight indexing problem
+    # mac-app-util removed: it runs an SBCL program during activation, and SBCL cannot run on
+    # macOS 27 (fixed-address heap: "failed to allocate ... at 0x300100000"). SBCL also can't be
+    # rebuilt because it bootstraps itself and hits the same failure. Restore once SBCL supports macOS 27.
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, mac-app-util, nix-homebrew}:
+  outputs = inputs@{ self, nix-darwin, nixpkgs, nix-homebrew}:
   let
     configuration = { pkgs, ... }: {
       # needed to install unfree apps like Cursor; Obsidian, etc
@@ -128,9 +128,8 @@
     # Build darwin flake using:
     # $ darwin-rebuild build --flake .#Eduardos-MacBook-Pro
     darwinConfigurations."Eduardos-MacBook-Pro" = nix-darwin.lib.darwinSystem {
-      modules = [ 
-        configuration 
-        mac-app-util.darwinModules.default
+      modules = [
+        configuration
         nix-homebrew.darwinModules.nix-homebrew
         {
           nix-homebrew = {
