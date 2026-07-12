@@ -101,7 +101,8 @@
         ];        # GUI apps from Homebrew Casks
         masApps = {
         };
-        taps = [ "anemll/tap" ];      # Optional: extra taps
+        # trusted: Homebrew 6.0 refuses to load formulae from non-official taps unless trusted.
+        taps = [ { name = "anemll/tap"; trusted = true; } ];      # Optional: extra taps
         onActivation.cleanup = "zap"; # Optional: cleanup removed brews/casks
       };
 
