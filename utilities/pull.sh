@@ -72,6 +72,10 @@ echo -e "${BLUE}=== Tmux Configuration ===${NC}"
 copy_file "$HOME/.tmux.conf" "$CONFIG_DIR/tmux/.tmux.conf"
 echo ""
 
+echo -e "${BLUE}=== Herdr Configuration ===${NC}"
+copy_file "$HOME/.config/herdr/config.toml" "$CONFIG_DIR/herdr/config.toml"
+echo ""
+
 echo -e "${BLUE}=== Zsh Configuration ===${NC}"
 copy_file "$HOME/.zshrc" "$CONFIG_DIR/zsh/.zshrc"
 copy_file "$HOME/.p10k.zsh" "$CONFIG_DIR/zsh/.p10k.zsh"

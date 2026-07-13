@@ -88,6 +88,7 @@
           "anemll-profile" # ANE MLL profiling tool
           "jira-cli" # Jira CLI
           "ffmpeg" # FFmpeg for video and audio processing
+          "herdr" # https://herdr.dev/ -> tmux for agents
         ];        # CLI tools from Homebrew
         casks = [ 
           "raycast" # Raycast -> better Spotlight
