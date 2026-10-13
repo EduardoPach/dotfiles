@@ -33,6 +33,7 @@ All utilities scripts (these scripts will be `.sh`) will live under `utilities` 
 |.p10k.zsh      |$HOME          |power level 10k conifugration for a beautiful terminal look             |
 |kitty      |$HOME/.config/kitty          |A directory containing all important files to configure kitty terminal             |
 |karabiner      |$HOME/.config/karabiner          |A directory containing all the important files to setup my karabiner modifications             |
+|nvim      |$HOME/.config/nvim          |My Neovim configuration built on [LazyVim](https://www.lazyvim.org/) (Python LSP + debugging, file finder, git UI, theme)             |
 
 ## Nix
 
@@ -96,6 +97,35 @@ tree ~/.config/karabiner/
 
 4 directories, 2 files
 ```
+
+## Neovim
+
+`neovim` is my editor, configured with [LazyVim](https://www.lazyvim.org/) — a batteries-included Neovim distribution built on top of `lazy.nvim` (the plugin manager). All configuration lives at `$HOME/.config/nvim/` and the whole directory is versioned here under `configuration/nvim/`:
+
+```bash
+> tree ~/.config/nvim/
+/Users/eduardo/.config/nvim/
+├── init.lua                 # entry point -> loads lua/config/lazy.lua
+├── lazyvim.json             # which LazyVim "extras" are enabled (python, dap, telescope)
+├── lazy-lock.json           # pins every plugin to an exact commit (reproducible installs)
+├── stylua.toml              # Lua formatter config
+└── lua
+    ├── config               # options / keymaps / autocmds + lazy.nvim bootstrap
+    └── plugins              # my plugin overrides (e.g. colorscheme.lua)
+```
+
+Neovim itself (plus its helpers `ripgrep`, `fd`, and `lazygit`) is installed via `nix` (see `flake.nix`). Nothing else is needed to bootstrap it: on the **first launch**, `lazy.nvim` self-installs and downloads every plugin pinned in `lazy-lock.json`, and [Mason](https://github.com/williamboman/mason.nvim) auto-installs the Python language server, linter, and debugger. Just run `nvim` once and wait for it to finish, then restart.
+
+What this config gives me out of the box:
+
+- **Python LSP** — completion, go-to-definition, hover docs, diagnostics, and rename via `basedpyright` + `ruff` (installed automatically by Mason). Enabled through the `lang.python` extra in `lazyvim.json`.
+- **Line-by-line Python debugging** — `nvim-dap` + `debugpy`. Set a breakpoint with `<leader>db`, start debugging with `<leader>dc`, step with the DAP UI. Enabled through the `dap.core` extra.
+- **Easy file access** — Telescope fuzzy finder: `<leader><space>` or `<leader>ff` to find files, `<leader>/` to live-grep the project, `<leader>fr` for recent files. `<leader>e` toggles the file explorer.
+- **File tree for unfamiliar codebases**: [Neo-tree](https://github.com/nvim-neo-tree/neo-tree.nvim) (the `editor.neo-tree` extra, tuned in `lua/plugins/explorer.lua`). It opens as a sidebar on its own when you start `nvim` with no file or on a directory (`nvim .`), and highlights the file you are editing. Inside the tree, `Z` expands every folder to show the whole structure at once and `z` collapses it. Dotfiles are shown, gitignored folders (`.venv`, `node_modules`, `build`) are hidden, and `I` toggles them. `<leader>e` toggles the tree, `<leader>ge` shows only git-changed files, and `?` lists every key.
+- **Git diff checker** — `gitsigns` shows added/changed/removed lines in the gutter (`<leader>gh` for hunk actions), and `<leader>gg` opens `lazygit` for a full-screen diff/stage/commit UI.
+- **Theme** — [Tokyo Night](https://github.com/folke/tokyonight.nvim) (`moon` variant) by default. `catppuccin`, `kanagawa`, and `gruvbox` are also installed — switch live with e.g. `:colorscheme catppuccin-mocha`, or change the default in `lua/plugins/colorscheme.lua`.
+
+> Tip: press `<space>` (the leader key) in normal mode and wait — [which-key](https://github.com/folke/which-key.nvim) pops up a menu of every available shortcut, so you don't have to memorize them.
 
 # Manual Commands:
 

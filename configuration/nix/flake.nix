@@ -52,8 +52,12 @@
       # List packages installed in system profile. To search by name, run:
       # $ nix-env -qaP | grep wget
       environment.systemPackages =
-        [ 
+        [
           pkgs.vim
+          pkgs.neovim # Neovim editor -> configured as LazyVim (see configuration/nvim)
+          pkgs.ripgrep # Fast grep -> powers Telescope live-grep in Neovim
+          pkgs.fd # Fast find -> powers Telescope find-files in Neovim
+          pkgs.lazygit # Terminal git UI -> Neovim git diff/commit viewer (<leader>gg)
           pkgs.tmux
           # Cursor: nix owns the version. Its built-in updater is disabled with "update.mode": "none"
           # in ~/Library/Application Support/Cursor/User/settings.json -- left on, it rewrites the app
