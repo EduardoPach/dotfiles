@@ -93,6 +93,7 @@
           "jira-cli" # Jira CLI
           "ffmpeg" # FFmpeg for video and audio processing
           "herdr" # https://herdr.dev/ -> tmux for agents
+          "backlog-md" # Backlog.md CLI -> task tracking for OpenBench-internal (backlog/)
         ];        # CLI tools from Homebrew
         casks = [ 
           "raycast" # Raycast -> better Spotlight
