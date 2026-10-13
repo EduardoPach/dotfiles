@@ -195,6 +195,27 @@ echo -e "${BLUE}=== Herdr Configuration ===${NC}"
 copy_file_safe "$CONFIG_DIR/herdr/config.toml" "$HOME/.config/herdr/config.toml"
 echo ""
 
+echo -e "${BLUE}=== Agent Skills ===${NC}"
+# Each skill goes to ~/.agents/skills/<name>, the cross-agent global location (Codex and others),
+# and is symlinked into ~/.claude/skills for Claude Code. Skills are copied one at a time so
+# skills installed by other tools (e.g. hf-cli) are left untouched.
+for skill_dir in "$CONFIG_DIR"/agents/skills/*/; do
+    [ -d "$skill_dir" ] || continue
+    skill="$(basename "$skill_dir")"
+    copy_directory_safe "${skill_dir%/}" "$HOME/.agents/skills/$skill"
+    link="$HOME/.claude/skills/$skill"
+    if [ -L "$link" ]; then
+        echo -e "${GREEN}Symlink already present, skipping:${NC} $link"
+    elif [ -e "$link" ]; then
+        echo -e "${RED}✗ Exists and is not a symlink, leaving it alone:${NC} $link"
+    else
+        mkdir -p "$HOME/.claude/skills"
+        ln -s "../../.agents/skills/$skill" "$link"
+        echo -e "${GREEN}✓ Linked${NC} $link -> ~/.agents/skills/$skill"
+    fi
+done
+echo ""
+
 echo -e "${BLUE}=== Zsh Configuration ===${NC}"
 copy_file_safe "$CONFIG_DIR/zsh/.zshrc" "$HOME/.zshrc"
 copy_file_safe "$CONFIG_DIR/zsh/.p10k.zsh" "$HOME/.p10k.zsh"
