@@ -227,6 +227,21 @@ else
     echo ""
 fi
 
+# Warm up Neovim: install lazy.nvim + all plugins headlessly so the first
+# interactive launch is instant. Optional/non-fatal: nvim may not be on PATH
+# until a shell restart, and this step needs network access.
+if command_exists nvim; then
+    echo -e "${YELLOW}Bootstrapping Neovim plugins (LazyVim)...${NC}"
+    echo -e "${CYAN}This downloads all plugins pinned in lazy-lock.json. May take a minute.${NC}"
+    run_command "Installing Neovim plugins" \
+                'nvim --headless "+Lazy! sync" +qa' \
+                "true"
+else
+    echo -e "${YELLOW}⚠ nvim not on PATH yet.${NC}"
+    echo "  Plugins will install automatically on your first 'nvim' launch after a terminal restart."
+    echo ""
+fi
+
 echo -e "${MAGENTA}╔══════════════════════════════════════════════════════════════════════╗${NC}"
 echo -e "${MAGENTA}║                    Phase 4: Install Global Commands                 ║${NC}"
 echo -e "${MAGENTA}║                   (Make commands available everywhere)               ║${NC}"
@@ -257,6 +272,7 @@ echo ""
 echo -e "${CYAN}Next Steps:${NC}"
 echo "• Restart your terminal or open a new terminal session"
 echo "• Run 'tmux' and press 'prefix + I' (usually Ctrl+b + I) to install tmux plugins"
+echo "• Run 'nvim' once — LazyVim finishes installing plugins + the Python toolchain (LSP/debugger) on first launch, then restart it"
 echo "• Verify your configurations are working as expected"
 echo ""
 echo -e "${CYAN}Global Commands Available:${NC}"

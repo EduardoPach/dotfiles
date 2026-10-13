@@ -107,6 +107,19 @@ else
 fi
 echo ""
 
+echo -e "${BLUE}=== Neovim Configuration ===${NC}"
+if [ -d "$HOME/.config/nvim" ]; then
+    echo -e "${YELLOW}Copying directory:${NC} $HOME/.config/nvim -> $CONFIG_DIR/nvim"
+    mkdir -p "$CONFIG_DIR"
+    # Remove existing nvim directory if it exists to ensure clean copy
+    rm -rf "$CONFIG_DIR/nvim"
+    cp -r "$HOME/.config/nvim" "$CONFIG_DIR/nvim"
+    echo -e "${GREEN}✓ Success${NC}"
+else
+    echo -e "${RED}✗ Source directory not found:${NC} $HOME/.config/nvim"
+fi
+echo ""
+
 echo -e "${GREEN}=== Pull Complete ===${NC}"
 echo "All configuration files have been copied to the repository."
 echo "You can now review the changes and commit them if desired."

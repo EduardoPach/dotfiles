@@ -208,6 +208,10 @@ echo -e "${BLUE}=== Karabiner Configuration ===${NC}"
 copy_directory_safe "$CONFIG_DIR/karabiner" "$HOME/.config/karabiner"
 echo ""
 
+echo -e "${BLUE}=== Neovim Configuration ===${NC}"
+copy_directory_safe "$CONFIG_DIR/nvim" "$HOME/.config/nvim"
+echo ""
+
 echo -e "${GREEN}=== Push Complete ===${NC}"
 echo "Configuration files have been pushed to the system."
 echo ""
