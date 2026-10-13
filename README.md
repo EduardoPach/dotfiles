@@ -27,6 +27,7 @@ All utilities scripts (these scripts will be `.sh`) will live under `utilities` 
 |------|----------|-------------|
 |flake.nix      | $HOME/.config/nix          |The flake file that builds 80% of my working env with very few commands             |
 |flake.lock      | $HOME/.config/nix          |The .lock file representing state of my flake             |
+|agents/skills      | $HOME/.agents/skills (symlinked into $HOME/.claude/skills)          |Global skills for coding agents, e.g. `mac-dependencies`: how to install software on this Mac             |
 |.tmux      | $HOME          |A directory containing a directory inside named `plugins` with all my tmux plugins - need to clone `tpm` there|
 |.tmux.conf      | $HOME          |A configuration for tmux containing some modifications for better usage             |
 |.zshrc      |$HOME          |My zsh configuration file containing a bunch of important modifications             |
@@ -48,6 +49,12 @@ The `nix` related files live at `$HOME/.config/nix/` and have the following tree
 
 1 directory, 2 files
 ```
+
+## Agent skills
+
+Global [skills](https://agentskills.io) that teach coding agents (Claude Code, Codex, ...) how this machine works. They live under `configuration/agents/skills/<name>/SKILL.md`. `make push` copies each one to `$HOME/.agents/skills/<name>`, the cross-agent global location, and symlinks it into `$HOME/.claude/skills/<name>` for Claude Code. Skills installed by other tools in those folders are left alone.
+
+- `mac-dependencies`: everything is declared in the nix-darwin flake, with Homebrew `cleanup = "zap"`. It covers brew vs nixpkgs vs casks vs App Store, how to validate without sudo, and handing `nix-sync` back to me.
 
 ## Tmux
 

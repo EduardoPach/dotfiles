@@ -76,6 +76,22 @@ echo -e "${BLUE}=== Herdr Configuration ===${NC}"
 copy_file "$HOME/.config/herdr/config.toml" "$CONFIG_DIR/herdr/config.toml"
 echo ""
 
+echo -e "${BLUE}=== Agent Skills ===${NC}"
+# Only skills already versioned here are pulled back; other installed skills are ignored.
+for skill_dir in "$CONFIG_DIR"/agents/skills/*/; do
+    [ -d "$skill_dir" ] || continue
+    skill="$(basename "$skill_dir")"
+    if [ -d "$HOME/.agents/skills/$skill" ]; then
+        echo -e "${YELLOW}Copying directory:${NC} $HOME/.agents/skills/$skill -> $CONFIG_DIR/agents/skills/$skill"
+        rm -rf "$CONFIG_DIR/agents/skills/$skill"
+        cp -r "$HOME/.agents/skills/$skill" "$CONFIG_DIR/agents/skills/$skill"
+        echo -e "${GREEN}✓ Success${NC}"
+    else
+        echo -e "${RED}✗ Source directory not found:${NC} $HOME/.agents/skills/$skill"
+    fi
+done
+echo ""
+
 echo -e "${BLUE}=== Zsh Configuration ===${NC}"
 copy_file "$HOME/.zshrc" "$CONFIG_DIR/zsh/.zshrc"
 copy_file "$HOME/.p10k.zsh" "$CONFIG_DIR/zsh/.p10k.zsh"
