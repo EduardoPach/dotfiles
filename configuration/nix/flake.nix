@@ -55,6 +55,10 @@
         [ 
           pkgs.vim
           pkgs.tmux
+          # Cursor: nix owns the version. Its built-in updater is disabled with "update.mode": "none"
+          # in ~/Library/Application Support/Cursor/User/settings.json -- left on, it rewrites the app
+          # inside the read-only nix store, so `cursor` (store path) and /Applications/Nix Apps drift apart.
+          # Upgrade with: nix flake update nixpkgs nix-darwin && darwin-rebuild switch
           pkgs.code-cursor
           pkgs.poetry # Poetry python package manager
           pkgs.kitty
