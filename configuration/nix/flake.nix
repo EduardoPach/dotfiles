@@ -93,6 +93,7 @@
           "jira-cli" # Jira CLI
           "ffmpeg" # FFmpeg for video and audio processing
           "herdr" # https://herdr.dev/ -> tmux for agents
+          "xcodegen" # XcodeGen -> generates Fil's Xcode project from project.yml (make generate, make cli)
         ];        # CLI tools from Homebrew
         casks = [ 
           "raycast" # Raycast -> better Spotlight
